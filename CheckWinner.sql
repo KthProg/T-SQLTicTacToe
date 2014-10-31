@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER proc [dbo].[pCheckWinner]
+CREATE proc [dbo].[pCheckWinner]
 as
 if 
 -- check rows
