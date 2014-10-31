@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER proc [dbo].[pStartGame] as
+CREATE proc [dbo].[pStartGame] as
 print '
 ==========================================================
 Tic Tac Toe - SQL Server 2008 - Kyle Hooks - 10/30/2014
