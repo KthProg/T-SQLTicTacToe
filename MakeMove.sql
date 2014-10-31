@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER proc [dbo].[pMakeMove]
+CREATE proc [dbo].[pMakeMove]
 	@row int = 0,
 	@col int = 0,
 	@skip bit = 0
