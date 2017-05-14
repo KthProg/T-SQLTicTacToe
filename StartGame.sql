@@ -1,6 +1,3 @@
-USE [Safety]
-GO
-/****** Object:  StoredProcedure [dbo].[pStartGame]    Script Date: 10/31/2014 16:41:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -31,7 +28,7 @@ message is displayed, and the board is cleared.
 The game will not display properly unless query output 
 is set to text.
 '
-
+-- create the board
 if not exists (
 		select * 
 		from INFORMATION_SCHEMA.TABLES 
