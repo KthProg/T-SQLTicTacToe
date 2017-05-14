@@ -1,6 +1,3 @@
-USE [Safety]
-GO
-/****** Object:  StoredProcedure [dbo].[pMakeMove]    Script Date: 10/31/2014 16:42:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,10 +7,13 @@ CREATE proc [dbo].[pMakeMove]
 	@col int = 0,
 	@skip bit = 0
 as
+-- only set piece if player did not skip
 if @skip = 0
 begin
+	-- if row and column are valid
 	if (@row between 1 and 3) and (@col between 1 and 3)
 	begin
+		-- update if space is null, otherwise, player forfeits move
 		declare @sql varchar(255)
 		set @sql = '
 		if (select ['+cast(@col as varchar(1))+'] from TicTacToe where row='+cast(@row as varchar(1))+') is null
@@ -37,11 +37,13 @@ end
 
 declare @winner int = 0
 
+-- check if player woon after move
 exec @winner = pCheckWinner
 if @winner = 1 begin return end
 
 declare @pcCol int = 0
 
+-- true for rows where column has empty spaces
 while @pcCol not in
 (
 	select 1 from TicTacToe where [1] is null
@@ -51,9 +53,11 @@ while @pcCol not in
 	select 3 from TicTacToe where [3] is null
 )
 begin
+	-- set pc position column between 1 and 3
 	set @pcCol = ceiling(rand()*3)
 end
 
+-- set pc row between 1 and 3 checking column for empty space
 set @sql = '
 declare @pcRow int = 0
 
@@ -69,5 +73,6 @@ where row=@pcRow
 
 exec(@sql)
 
+-- check if pc won after move
 exec @winner = pCheckWinner
 if @winner = 1 begin return end
