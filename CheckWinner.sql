@@ -1,6 +1,3 @@
-USE [Safety]
-GO
-/****** Object:  StoredProcedure [dbo].[pCheckWinner]    Script Date: 10/31/2014 16:41:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -84,6 +81,7 @@ begin
 		or [3] is null
 	)
 	begin
+		-- set board when tied
 		print 'Tie game'
 		select * from vGameBoard
 		update TicTacToe set [1]=null,[2]=null,[3]=null
@@ -91,5 +89,6 @@ begin
 	end
 end
 
+-- show game result
 select * from vGameBoard
 
